@@ -1,0 +1,198 @@
+/* Общие стили */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #121212;
+    color: #f3f3f3;
+    margin: 0;
+    text-align: center;
+}
+
+header {
+    background-color: #181818;
+    padding: 20px;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 2.5em;
+    color: #e63946;
+}
+
+nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+nav ul li {
+    display: inline;
+    margin: 0 15px;
+}
+
+nav ul li a {
+    color: #f3f3f3;
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+
+nav ul li a:hover {
+    color: #e63946;
+}
+
+/* Баннер */
+.banner {
+    background: url('banner_image.jpg') no-repeat center center/cover;
+    padding: 80px 0;
+    color: #f3f3f3;
+    text-align: center;
+}
+
+.banner-text h2 {
+    font-size: 2.5em;
+}
+
+.banner-text p {
+    font-size: 1.2em;
+}
+
+/* Раздел "О нас" */
+#about {
+    padding: 40px;
+    background-color: #181818;
+}
+
+#about h2 {
+    font-size: 2em;
+    color: #e63946;
+}
+
+/* Таблица турниров */
+#tournaments table {
+    width: 80%;
+    margin: 20px auto;
+    border-collapse: collapse;
+    color: #f3f3f3;
+}
+
+#tournaments th, #tournaments td {
+    padding: 15px;
+    border: 1px solid #444;
+}
+
+#tournaments th {
+    background-color: #333;
+    color: #e63946;
+}
+
+#tournaments td {
+    background-color: #222;
+}
+
+#tournaments tr:hover {
+    background-color: #333;
+}
+
+/* Раздел "Команды" */
+#teams {
+    background-color: #181818;
+    padding: 40px;
+}
+
+#teams h2 {
+    color: #e63946;
+    font-size: 2.5em;
+    margin-bottom: 20px;
+}
+
+#team-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+}
+
+#team-list .team {
+    background-color: #222;
+    padding: 20px;
+    border-radius: 10px;
+    width: 250px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: box-shadow 0.3s ease;
+    text-align: left;
+}
+
+#team-list .team:hover {
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+}
+
+#team-list .team img {
+    width: 100%;
+    border-radius: 10px;
+}
+
+#team-list .team h3 {
+    font-size: 1.5em;
+    color: #e63946;
+    margin-top: 15px;
+}
+
+#team-list .team p {
+    color: #ddd;
+    font-size: 1em;
+    margin-top: 10px;
+}
+
+/* Галерея */
+.gallery-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    padding: 20px;
+}
+
+.gallery-container img {
+    width: 200px;
+    height: auto;
+    border-radius: 10px;
+    transition: transform 0.3s ease;
+}
+
+.gallery-container img:hover {
+    transform: scale(1.1);
+}
+
+/* Футер */
+footer {
+    background-color: #181818;
+    padding: 10px;
+    font-size: 0.9em;
+}
+
+footer p {
+    color: #f3f3f3;
+}
+
+/* Мобильная адаптация */
+@media (max-width: 768px) {
+    nav ul li {
+        display: block;
+        margin: 10px 0;
+    }
+
+    #tournaments table {
+        width: 100%;
+        font-size: 0.9em;
+    }
+
+    #team-list {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .gallery-container img {
+        width: 90%;
+        max-width: 300px;
+    }
+}

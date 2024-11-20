@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Belgrade ELeague - Dota 2 Tournaments</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <style>
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background-color: #181818;
+            padding: 15px;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        header h1 {
+            font-size: 2em;
+            color: #e63946;
+            margin: 0;
+            padding: 0;
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+            text-align: center;
+        }
+
+        nav ul li {
+            display: inline-block;
+            margin: 0 15px;
+        }
+
+        nav ul li a {
+            color: #f3f3f3;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.2em;
+            transition: color 0.3s ease;
+        }
+
+        nav ul li a:hover {
+            color: #e63946;
+        }
+
+        /* Основной баннер */
+        .banner {
+            background: url('{{ url_for('static', filename='images/banner_image.jpg') }}') no-repeat center center/cover;
+            padding: 100px 0;
+            color: #f3f3f3;
+            text-align: center;
+        }
+
+        .banner-text h2 {
+            font-size: 3em;
+            font-weight: bold;
+            animation: fadeIn 1.5s ease-out;
+        }
+
+        .banner-text p {
+            font-size: 1.5em;
+            margin-top: 20px;
+            animation: fadeIn 2s ease-out;
+        }
+
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Раздел с турнирами */
+        #tournaments table {
+            width: 90%;
+            margin: 30px auto;
+            border-collapse: collapse;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        #tournaments th, #tournaments td {
+            padding: 15px;
+            text-align: left;
+            font-size: 1.1em;
+        }
+
+        #tournaments th {
+            background-color: #333;
+            color: #f3f3f3;
+        }
+
+        #tournaments td {
+            background-color: #222;
+            color: #ddd;
+        }
+
+        #tournaments tr:hover {
+            background-color: #444;
+        }
+
+        /* Вкладки */
+        .tabs {
+            margin: 20px 0;
+            display: flex;
+            justify-content: center;
+        }
+
+        .tab-button {
+            padding: 10px 20px;
+            margin: 0 10px;
+            cursor: pointer;
+            border: none;
+            background-color: #333;
+            color: #fff;
+            font-size: 16px;
+            border-radius: 5px;
+        }
+
+        .tab-button.active {
+            background-color: #e63946;
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        /* Стиль галереи */
+        .gallery-container {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            padding: 20px;
+            opacity: 0;
+            animation: fadeIn 2s ease-in-out forwards;
+            flex-wrap: wrap; /* Чтобы изображения располагались красиво на разных устройствах */
+        }
+
+        .gallery-container img {
+            width: 100%;
+            max-width: 300px;
+            border-radius: 10px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .gallery-container img:hover {
+            transform: scale(1.1);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Стиль футера */
+        footer {
+            background-color: #181818;
+            color: #f3f3f3;
+            text-align: center;
+            padding: 20px;
+            font-size: 1em;
+            opacity: 0;
+            animation: fadeIn 2s ease-in-out forwards;
+        }
+
+        footer p {
+            margin: 0;
+        }
+
+        /* Адаптивность для мобильных устройств */
+        @media (max-width: 768px) {
+            nav ul li {
+                display: block;
+                margin: 10px 0;
+            }
+
+            .gallery-container {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            #tournaments table {
+                width: 100%;
+                font-size: 0.9em;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Belgrade ELeague</h1>
+        <nav>
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#tournaments">Tournaments</a></li>
+                <li><a href="#teams">Teams</a></li>
+                <li><a href="#gallery">Gallery</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section id="home" class="banner">
+        <div class="banner-text">
+            <h2>Welcome to the World of Dota 2 Tournaments</h2>
+            <p>Explore the latest tournaments, teams, and schedules.</p>
+        </div>
+    </section>
+
+    <section id="about">
+        <h2>About Us</h2>
+        <p>Welcome to our Dota 2 Tournaments website! Here, you can find the latest information on tournaments, prize pools, and teams competing in the arena. Join us as we follow the journey of champions.</p>
+    </section>
+
+    <section id="tournaments">
+        <h2>All Tournaments</h2>
+
+        <div class="tabs">
+            <button class="tab-button active" data-tab="tournaments-tab">Tournaments</button>
+            <button class="tab-button" data-tab="teams-tab">Teams</button>
+        </div>
+
+        <div id="tournaments-tab" class="tab-content active">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Start Date</th>
+                        <th>End Date</th>
+                        <th>Prize Pool ($)</th>
+                        <th>Winner</th>
+                    </tr>
+                </thead>
+                <tbody id="tournament-data">
+                </tbody>
+            </table>
+        </div>
+
+        <div id="teams-tab" class="tab-content">
+            <h2>Teams</h2>
+            <div id="team-list">
+            </div>
+        </div>
+    </section>
+
+    <section id="gallery">
+        <h2>Gallery</h2>
+        <div class="gallery-container">
+            <img src="{{ url_for('static', filename='images/dota_image1.jpg') }}" alt="Tournament 1">
+            <img src="{{ url_for('static', filename='images/dota_image2.jpg') }}" alt="Tournament 2">
+            <img src="{{ url_for('static', filename='images/dota_image3.jpg') }}" alt="Tournament 3">
+            <img src="{{ url_for('static', filename='images/dota_image4.jpg') }}" alt="Tournament 4">
+            <img src="{{ url_for('static', filename='images/dota_image5.jpg') }}" alt="Tournament 5">
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2024 Belgrade ELeague. All rights reserved.</p>
+    </footer>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            fetch("http://127.0.0.1:5000/api/tournaments")
+                .then(response => response.json())
+                .then(data => {
+                    const tableBody = document.getElementById("tournament-data");
+                    data.forEach(tournament => {
+                        const row = document.createElement("tr");
+                        row.innerHTML = `
+                            <td>${tournament.name}</td>
+                            <td>${new Date(tournament.start_date).toLocaleDateString()}</td>
+                            <td>${new Date(tournament.end_date).toLocaleDateString()}</td>
+                            <td>$${tournament.prize_pool.toLocaleString()}</td>
+                            <td>${tournament.winner ? tournament.winner : 'N/A'}</td>
+                        `;
+                        tableBody.appendChild(row);
+                    });
+                })
+                .catch(error => console.error("Error fetching tournaments:", error));
+        });
+
+        document.querySelectorAll('.tab-button').forEach(button => {
+            button.addEventListener('click', () => {
+                document.querySelectorAll('.tab-button').forEach(btn => btn.classList.remove('active'));
+                document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
+                button.classList.add('active');
+                document.getElementById(button.dataset.tab).classList.add('active');
+            });
+        });
+    </script>
+</body>
+</html>
