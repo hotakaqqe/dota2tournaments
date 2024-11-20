@@ -7,10 +7,6 @@ app = Flask(__name__, static_folder='static')
 def create_db_connection():
     try:
         return mysql.connector.connect(
-            host="localhost",
-            user="root",
-            password="",
-            database="dota2_tournaments"
         )
     except Error as e:
         print(f"Database connection error: {e}")
